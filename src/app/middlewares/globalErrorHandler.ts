@@ -44,11 +44,11 @@ const globalErrorHanlders: ErrorRequestHandler = (
     ];
   } else if (error instanceof TokenExpiredError) {
     statusCode = 401; // Use 401 Unauthorized for token expiration
-    message = "Token has expired"; // Customize this message
+    message = "Invalid Token";
     errorSource = [
       {
         path: "",
-        message: "Token has expired",
+        message: "Invalid Token",
       },
     ];
   } else if (error instanceof Error) {
