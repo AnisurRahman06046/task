@@ -1,17 +1,19 @@
+import httpStatus from "http-status";
 import config from "../../config";
+import AppError from "../../errors/AppError";
 import User from "../users/users.model";
 import { TLoginUser } from "./auth.interface";
 import { generateToken } from "./auth.utils";
 
 const loginUser = async (payload: TLoginUser) => {
-//   console.log(payload);
+  //   console.log(payload);
 
   const user = await User.findOne({ email: payload.email });
   if (!user) {
-    throw new Error("User is not found!");
+    throw new AppError(httpStatus.FORBIDDEN, "User is not found");
   }
   if (!(await User.isPasswordMatched(payload?.password, user?.password))) {
-    throw new Error("Password is incorrect");
+    throw new AppError(httpStatus.FORBIDDEN, "Password is incorrect");
   }
 
   //   generate token and send to client

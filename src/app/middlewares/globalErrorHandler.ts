@@ -6,6 +6,7 @@ import { ZodError } from "zod";
 import handleZodError from "../errors/handleZodError";
 import handleValidationError from "../errors/handleValidationError";
 import AppError from "../errors/AppError";
+import { TokenExpiredError } from "jsonwebtoken";
 
 const globalErrorHanlders: ErrorRequestHandler = (
   error: any,
@@ -39,6 +40,15 @@ const globalErrorHanlders: ErrorRequestHandler = (
       {
         path: "",
         message: error?.message,
+      },
+    ];
+  } else if (error instanceof TokenExpiredError) {
+    statusCode = 401; // Use 401 Unauthorized for token expiration
+    message = "Token has expired"; // Customize this message
+    errorSource = [
+      {
+        path: "",
+        message: "Token has expired",
       },
     ];
   } else if (error instanceof Error) {
