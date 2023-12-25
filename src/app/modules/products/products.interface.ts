@@ -3,5 +3,5 @@ export type TProduct = {
   size: string;
   price: number;
   image: string;
-  quantity: number;
+  // quantity: number;
 };

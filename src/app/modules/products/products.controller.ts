@@ -3,6 +3,7 @@ import catchAsync from "../../utils/catchAsync";
 import { productServices } from "./products.service";
 import sendResponse from "../../utils/sendApiResponse";
 import httpStatus from "http-status";
+import multer from "multer";
 
 const createProduct = catchAsync(async (req: Request, res: Response) => {
   const data = req.body;
@@ -11,3 +12,4 @@ const createProduct = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const productControllers = { createProduct };
+
