@@ -1,6 +1,11 @@
-import {z} from 'zod'
+import { z } from "zod";
 
 const userSchemaValidation = z.object({
-    fullName:z.string({required_error:'Full Name is required'}),
-    email:z.string({required_error:'Email is required'})
-})
+  body: z.object({
+    fullName: z.string({ required_error: "Full Name is required" }),
+    password: z.string({ required_error: "Password is required" }),
+    email: z.string({ required_error: "Email is required" }),
+  }),
+});
+
+export const userValidation = { userSchemaValidation };
