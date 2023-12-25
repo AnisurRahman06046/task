@@ -4,7 +4,8 @@ import { TLoginUser } from "./auth.interface";
 import { generateToken } from "./auth.utils";
 
 const loginUser = async (payload: TLoginUser) => {
-  const user = await User.findById(payload.email);
+  console.log(payload);
+  const user = await User.findOne({ email: payload.email });
   if (!user) {
     throw new Error("User is not found!");
   }
@@ -26,5 +27,4 @@ const loginUser = async (payload: TLoginUser) => {
   return { accessToken };
 };
 
-
-export const authService={loginUser}
+export const authService = { loginUser };
