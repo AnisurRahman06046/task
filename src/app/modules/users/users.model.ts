@@ -4,15 +4,15 @@ import bcrypt from "bcrypt";
 const userSchema = new Schema<TUSER>({
   fullName: {
     type: String,
-    required: true,
+    required: [true,'Full name is required'],
   },
   password: {
     type: String,
-    required: true,
+    required: [true,'Password is required'],
   },
   email: {
     type: String,
-    required: true,
+    required: [true,'Email is required'],
   },
 });
 
