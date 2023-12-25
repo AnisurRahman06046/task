@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { TUSER } from "./users.interface";
+import { TUSER, UserModel } from "./users.interface";
 import bcrypt from "bcrypt";
 const userSchema = new Schema<TUSER>({
   fullName: {
@@ -22,5 +22,9 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-const User = model<TUSER>("User", userSchema);
+// check password match
+userSchema.statics.isPasswordMatched=async function(plainPassword,hashedPassword){
+    return await bcrypt.compare(plainPassword,hashedPassword)
+}
+const User = model<TUSER,UserModel>("User", userSchema);
 export default User;
