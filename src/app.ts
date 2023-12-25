@@ -3,6 +3,7 @@ import cors from "cors";
 import routes from "./app/routes";
 import globalErrorHanlders from "./app/middlewares/globalErrorHandler";
 import notFoundHandler from "./app/middlewares/notFound";
+import auth from "./app/middlewares/auth";
 
 const app: Application = express();
 
@@ -11,7 +12,7 @@ app.use(express.json());
 app.use("/api/v1", routes);
 
 // testing api
-app.get("/", (req: Request, res: Response) => {
+app.get("/",auth(), (req: Request, res: Response) => {
   res.send("api is working....");
 });
 
