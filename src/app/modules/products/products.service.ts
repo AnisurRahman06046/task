@@ -6,4 +6,9 @@ const createProductIntoDb = async (payload: TProduct) => {
   return result;
 };
 
-export const productServices = { createProductIntoDb };
+const getProducts = async () => {
+  const result = await Product.find({});
+  return result;
+};
+
+export const productServices = { createProductIntoDb, getProducts };
