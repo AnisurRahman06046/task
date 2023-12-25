@@ -25,3 +25,6 @@ const loginUser = async (payload: TLoginUser) => {
   );
   return { accessToken };
 };
+
+
+export const authService={loginUser}
