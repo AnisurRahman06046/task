@@ -7,6 +7,7 @@ import handleZodError from "../errors/handleZodError";
 import handleValidationError from "../errors/handleValidationError";
 import AppError from "../errors/AppError";
 import { TokenExpiredError } from "jsonwebtoken";
+import handleDuplicateError from "../errors/handleDuplicateError";
 
 const globalErrorHanlders: ErrorRequestHandler = (
   error: any,
@@ -33,6 +34,11 @@ const globalErrorHanlders: ErrorRequestHandler = (
     statusCode = err?.statusCode;
     message = err?.message;
     errorSource = err?.errorSource;
+  } else if (error?.code === 11000) {
+    const simplifiedError = handleDuplicateError(error);
+    statusCode = simplifiedError?.statusCode;
+    message = simplifiedError?.message;
+    errorSource = simplifiedError?.errorSource;
   } else if (error instanceof AppError) {
     statusCode = error?.statusCode;
     message = error?.message;
